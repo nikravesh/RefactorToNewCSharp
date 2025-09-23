@@ -18,8 +18,7 @@ public class LoggingInterceptor : SaveChangesInterceptor
 
             foreach (var entry in entiries)
             {
-                Console.WriteLine($@"[Information Log] : 
-                                     Adding product : {entry.Entity.Name}, Price : {entry.Entity.Price}");
+                Console.WriteLine($@"[Information Log]: Adding product : {entry.Entity.Name}, Price: {entry.Entity.Price}");
             }
         }
 
@@ -39,8 +38,7 @@ public class LoggingInterceptor : SaveChangesInterceptor
 
             foreach (var entry in entries)
             {
-                Console.WriteLine($@"[Information Log(async method)] : 
-                                   Adding product : {entry.Entity.Name}, Price : {entry.Entity.Price}");
+                Console.WriteLine($@"[Information Log(async method)]: Adding product : {entry.Entity.Name}, Price: {entry.Entity.Price}");
             }
         }
         return base.SavingChangesAsync(eventData, result, cancellationToken);
