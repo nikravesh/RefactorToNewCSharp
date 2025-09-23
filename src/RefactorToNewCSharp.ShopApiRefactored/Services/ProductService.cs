@@ -1,4 +1,6 @@
-﻿using RefactorToNewCSharp.ShopApiRefactored.Dto;
+﻿using Microsoft.EntityFrameworkCore;
+
+using RefactorToNewCSharp.ShopApiRefactored.Dto;
 using RefactorToNewCSharp.ShopApiRefactored.Models;
 
 using ShopApp.Data;
@@ -14,7 +16,7 @@ public class ProductService(ShopDbContext db)
 
     public ProductDto GetProduct(int id)
     {
-        var product = db.Products.Find(id);
+        var product = db.Products.FirstOrDefault(p => p.Id == id);
 
         if (product is not null)
             return ToDto(product);
@@ -24,7 +26,7 @@ public class ProductService(ShopDbContext db)
 
     public async Task<ProductDto> GetProductAsync(int id)
     {
-        var product = await db.Products.FindAsync(id);
+        var product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
 
         if (product is not null)
             return ToDto(product);
