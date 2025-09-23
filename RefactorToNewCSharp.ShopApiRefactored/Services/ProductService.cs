@@ -3,19 +3,12 @@
 using ShopApp.Data;
 
 namespace ShopApp.Services;
-public class ProductService
+public class ProductService (ShopDbContext db)
 {
-    private readonly ShopDbContext _db;
-
-    public ProductService(ShopDbContext db)
-    {
-        _db = db;
-    }
-
     public void AddProduct(Product product)
     {
-        _db.Products.Add(product);
-        _db.SaveChanges();
+        db.Products.Add(product);
+        db.SaveChanges();
     }
 
     public void CategorizeProduct(Product product)
