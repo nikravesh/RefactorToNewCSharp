@@ -5,7 +5,7 @@ using RefactorToNewCSharp.ShopApiRefactored.Models;
 namespace ShopApp.Data;
 public class ShopDbContext : DbContext
 {
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Product> Products => Set<Product>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

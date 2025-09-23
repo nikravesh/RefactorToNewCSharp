@@ -15,13 +15,11 @@ public class ProductService(ShopDbContext db)
 
     public Task SaveAsync() => db.SaveChangesAsync();
 
-    public void CategorizeProduct(Product product)
-    {
-        if (product.Price < CheapCost)
-            Console.WriteLine($"{product.Name} is Cheap");
-        else if (product.Price >= CheapCost && product.Price < NormalCost)
-            Console.WriteLine($"{product.Name} is Normal");
-        else
-            Console.WriteLine($"{product.Name} is Expensive");
-    }
+    public void CategorizeProduct(Product product) =>
+        Console.WriteLine(product.Price switch
+        {
+            < CheapCost => $"{product.Name} is Cheap",
+            >= CheapCost and < NormalCost => $"{product.Name} is Normal",
+            _ => $"{product.Name} is Expensive"
+        });
 }
