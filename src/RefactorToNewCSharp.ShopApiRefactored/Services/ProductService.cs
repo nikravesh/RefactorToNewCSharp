@@ -1,4 +1,5 @@
-﻿using RefactorToNewCSharp.ShopApiRefactored.Models;
+﻿using RefactorToNewCSharp.ShopApiRefactored.Dto;
+using RefactorToNewCSharp.ShopApiRefactored.Models;
 
 using ShopApp.Data;
 
@@ -11,6 +12,25 @@ public class ProductService(ShopDbContext db)
 
     public async Task AddProductAsync(Product product) => await db.AddAsync(product);
 
+    public ProductDto GetProduct(int id)
+    {
+        var product = db.Products.Find(id);
+
+        if (product is not null)
+            return ToDto(product);
+
+        throw new Exception("Product not found!");
+    }
+
+    public async Task<ProductDto> GetProductAsync(int id)
+    {
+        var product = await db.Products.FindAsync(id);
+
+        if (product is not null)
+            return ToDto(product);
+
+        throw new Exception("Product not found!");
+    }
     public void Save() => db.SaveChanges();
 
     public Task SaveAsync() => db.SaveChangesAsync();
@@ -22,4 +42,7 @@ public class ProductService(ShopDbContext db)
             >= CheapCost and < NormalCost => $"{product.Name} is Normal",
             _ => $"{product.Name} is Expensive"
         });
+
+    private ProductDto ToDto(Product product)
+        => new(product.Name, product.Price);
 }

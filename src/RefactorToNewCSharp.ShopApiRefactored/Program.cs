@@ -15,4 +15,8 @@ await productService.SaveAsync();
 productService.CategorizeProduct(book);
 productService.CategorizeProduct(laptop);
 
+var product = await productService.GetProductAsync(1);
+Console.WriteLine(product);
+
+
 Console.ReadKey();
