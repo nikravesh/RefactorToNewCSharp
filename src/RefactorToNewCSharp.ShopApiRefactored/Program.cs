@@ -7,10 +7,10 @@ Product laptop = new("Laptop",10000);
 Product book = new("Book", 100);
 
 ProductService productService = new(new ShopDbContext());
-productService.AddProduct(book);
-productService.AddProduct(laptop);
+await productService.AddProductAsync(book);
+await productService.AddProductAsync(laptop);
 
-productService.Save();
+await productService.SaveAsync();
 
 productService.CategorizeProduct(book);
 productService.CategorizeProduct(laptop);

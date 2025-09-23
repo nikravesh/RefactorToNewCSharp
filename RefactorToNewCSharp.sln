@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{759A837A-6C7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAppOld", "src\ShopApp\ShopAppOld.csproj", "{0E24C9B9-7CB9-4A2F-8137-2D8D751B7B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorToNewCSharp.ShopApiRefactored", "RefactorToNewCSharp.ShopApiRefactored\RefactorToNewCSharp.ShopApiRefactored.csproj", "{5216B673-E65A-4B7B-8F8B-CC7761C8B48F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorToNewCSharp.ShopApiRefactored", "src\RefactorToNewCSharp.ShopApiRefactored\RefactorToNewCSharp.ShopApiRefactored.csproj", "{5216B673-E65A-4B7B-8F8B-CC7761C8B48F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
