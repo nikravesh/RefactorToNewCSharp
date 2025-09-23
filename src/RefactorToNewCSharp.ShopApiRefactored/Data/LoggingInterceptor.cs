@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using RefactorToNewCSharp.ShopApiRefactored.Models;
@@ -19,13 +20,7 @@ public class LoggingInterceptor : SaveChangesInterceptor
 
             foreach (var entry in entiries)
             {
-                Console.WriteLine($@"[Information Log]: Adding product : {entry.Entity.Name}, Price: {entry.Entity.Price}");
-
-                entry.Property("CreatedAt").CurrentValue = DateTime.Now;
-                entry.Property("CreatedBy").CurrentValue = userId;
-
-                Console.WriteLine($"Adding time: {entry.Property("CreatedAt").CurrentValue}");
-                Console.WriteLine($"Adding by: {entry.Property("CreatedBy").CurrentValue}");
+                LogAndSetShadowProperties(entry);
             }
         }
 
@@ -45,15 +40,20 @@ public class LoggingInterceptor : SaveChangesInterceptor
 
             foreach (var entry in entries)
             {
-                Console.WriteLine($@"[Information Log(async method)]: Adding product : {entry.Entity.Name}, Price: {entry.Entity.Price}");
-
-                entry.Property("CreatedAt").CurrentValue = DateTime.Now;
-                entry.Property("CreatedBy").CurrentValue = userId;
-
-                Console.WriteLine($"Adding time: {entry.Property("CreatedAt").CurrentValue}");
-                Console.WriteLine($"Adding by: {entry.Property("CreatedBy").CurrentValue}");
+                LogAndSetShadowProperties(entry); 
             }
         }
         return base.SavingChangesAsync(eventData, result, cancellationToken);
+    }
+
+    private void LogAndSetShadowProperties(EntityEntry<Product> entry)
+    {
+        Console.WriteLine($@"[Information Log]: Adding product : {entry.Entity.Name}, Price: {entry.Entity.Price}");
+
+        entry.Property("CreatedAt").CurrentValue = DateTime.Now;
+        entry.Property("CreatedBy").CurrentValue = userId;
+
+        Console.WriteLine($"Adding time: {entry.Property("CreatedAt").CurrentValue}");
+        Console.WriteLine($"Adding by: {entry.Property("CreatedBy").CurrentValue}");
     }
 }
